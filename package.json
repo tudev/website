@@ -1,0 +1,32 @@
+{
+  "name": "tudev-website",
+  "version": "1.0.0",
+  "description": "The Temple software development club's website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tudev/website.git"
+  },
+  "keywords": [
+    "tudev"
+  ],
+  "author": "Sandile Keswa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tudev/website/issues"
+  },
+  "homepage": "https://github.com/tudev/website",
+  "devDependencies": {
+    "browserify": "^6.3.2",
+    "gulp": "^3.8.10",
+    "gulp-less": "^1.3.6",
+    "gulp-minify-html": "^0.1.6",
+    "gulp-sourcemaps": "^1.2.8",
+    "reactify": "^0.15.2",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.1.1"
+  }
+}
