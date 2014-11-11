@@ -10,7 +10,9 @@ var gulp		= require('gulp'),
 	less		= require('gulp-less');
 	sourcemaps	= require('gulp-sourcemaps'),
 	// HTML-related imports
-	minify		= require('gulp-minify-html');
+	minify		= require('gulp-minify-html'),
+	// Dev-server-related imports
+	nodemon		= require('nodemon');
 
 var helpers = {
 	rebundle: function(bundle) {
@@ -74,10 +76,24 @@ gulp.task('pages', function() {
 		.pipe(gulp.dest(path.join('client', 'dist', 'pages')));
 });
 
-// Watches changes to the client codebase
-gulp.task('watch', ['less', 'pages', 'watchify'], function() {
+// Watches changes to the client code
+gulp.task('watch-client', ['less', 'pages', 'watchify'], function() {
 	gulp.watch('client/pages/*.html', ['pages']);
 	gulp.watch('client/less/**/*.less', ['less']);
+});
+
+// Runs dev server and watches client code
+gulp.task('dev', ['watch-client'], function() {
+	nodemon({
+		script: 'index.js',
+		ext: 'js',
+		ignore: ['client/*'],
+		env: {
+			// TODO environment variables go here
+			PORT: 3000,
+			DB: 'postgres://dvzydscckhxzfw:wdUhUlyWZs3PEFDeIV8eySfqpB@ec2-54-204-39-187.compute-1.amazonaws.com:5432/d3irc48flvi6oh'
+		}
+	});
 });
 
 // Run all compilation tasks
