@@ -27,6 +27,7 @@
     "gulp-sourcemaps": "^1.2.8",
     "nodemon": "^1.2.1",
     "reactify": "^0.15.2",
+    "rimraf": "^2.2.8",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1"
   }
