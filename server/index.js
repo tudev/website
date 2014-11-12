@@ -27,7 +27,7 @@ module.exports = function(done) {
             log.error('Server could not start', err);
             if (done) done(err);
         } else {
-            log.info('Server is listening on ' + util.env.serverPort);
+            log.info('Server is listening on ' + util.env.serverPort + '\n');
             if (done) done();
         }
     });
