@@ -93,15 +93,15 @@ gulp.task('watch', ['clean', 'less', 'pages', 'watchify'], function() {
 
 // Runs dev server and watches client code
 gulp.task('dev', ['watch'], function() {
-    console.log('\n');
     nodemon({
         script: 'index.js',
         ext: 'js',
         ignore: ['client/*'],
         env: {
-            // TODO environment variables go here
+            // Server environment
             PORT: 3000,
-            DB: 'postgres://dvzydscckhxzfw:wdUhUlyWZs3PEFDeIV8eySfqpB@ec2-54-204-39-187.compute-1.amazonaws.com:5432/d3irc48flvi6oh'
+            DB: 'postgres://dvzydscckhxzfw:wdUhUlyWZs3PEFDeIV8eySfqpB@ec2-54-204-39-187.compute-1.amazonaws.com:5432/d3irc48flvi6oh',
+            VERBOSE: true
         }
     });
 });
