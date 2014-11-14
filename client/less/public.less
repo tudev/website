@@ -1,0 +1,68 @@
+@import "colors";
+@import "public/splash";
+
+@header-height: 50px;
+@footer-height: 30px;
+
+#public {
+    header {
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: @header-height;
+        background: @color-primary;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+
+        #logo {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -15px;
+            margin-top: -15px;
+            background-image: url(/static/img/header-logo.png);
+            background-size: 30px 30px;
+            cursor: pointer;
+        }
+    }
+
+    #content {
+        display: block;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: @footer-height;
+        top: @header-height;
+    }
+
+    footer {
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        color: darken(white, 10%);
+        background: @color-dark-gray;
+        text-align: center;
+        height: @footer-height;
+
+        span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            top: 3px;
+
+            i {
+                position: relative;
+                top: 4px;
+                font-size: 14px;
+                padding: 0px 3px;
+            }
+        }
+    }
+}

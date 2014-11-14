@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     // Generic imports
+    gutil = require('gulp-util'),
     path = require('path'),
     clean = require('rimraf'),
     // Browserify-related imports
@@ -16,11 +17,12 @@ var gulp = require('gulp'),
     nodemon = require('nodemon');
 
 var helpers = {
-    rebundle: function(bundle) {
-        bundle
+    rebundle: function(bundler) {
+        gutil.log('Re-bundling client js');
+        bundler
             .bundle()
-            .pipe(source(path.join('client', 'js', 'main.js')))
-            .pipe(gulp.dest(path.join('client', 'dist', 'js')));
+            .pipe(source(path.join(__dirname, 'main.js')))
+            .pipe(gulp.dest(path.join(__dirname, 'client', 'dist', 'js')));
     }
 };
 
@@ -80,15 +82,23 @@ gulp.task('pages', function() {
         .pipe(gulp.dest(path.join('client', 'dist', 'pages')));
 });
 
+// Condenses the pages
+gulp.task('images', function() {
+    // TODO: image compression
+    gulp.src('./client/img/**/*')
+        .pipe(gulp.dest(path.join('client', 'dist', 'img')));
+});
+
 // Clears all compiled client code
 gulp.task('clean', function() {
     clean.sync(path.join(__dirname, 'client', 'dist'));
 });
 
 // Watches changes to the client code
-gulp.task('watch', ['clean', 'less', 'pages', 'watchify'], function() {
+gulp.task('watch', ['clean', 'less', 'pages', 'images', 'watchify'], function() {
     gulp.watch('client/pages/*.html', ['pages']);
     gulp.watch('client/less/**/*.less', ['less']);
+    gulp.watch('client/img/**/*', ['images']);
 });
 
 // Runs dev server and watches client code
@@ -107,4 +117,4 @@ gulp.task('dev', ['watch'], function() {
 });
 
 // Run all compilation tasks
-gulp.task('default', ['less', 'pages', 'browserify']);
+gulp.task('default', ['clean', 'less', 'pages', 'images', 'browserify']);
