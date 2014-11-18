@@ -8,13 +8,28 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    transition: opacity 0.25s;
+
+    &.hidden {
+        opacity: 0;
+    }
 
     #blurb {
+        position: relative;
+        top: 0px;
         width: 250px;
         display: table-cell;
         vertical-align: middle;
         text-align: center;
         color: white;
+        opacity: 1.0;
+        transition: top 1s, opacity 1s;
+
+        &.loading {
+            position: relative;
+            top: 25px;
+            opacity: 0;
+        }
 
         h1 {
             margin-top: -50px;

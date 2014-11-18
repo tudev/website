@@ -36,6 +36,7 @@
     "async": "^0.9.0",
     "colors": "^1.0.3",
     "express": "^4.10.2",
+    "jquery-browserify": "^1.8.1",
     "react": "^0.12.0",
     "react-router": "^0.10.2"
   }
