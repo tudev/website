@@ -1,7 +1,9 @@
 var express = require('express'),
     // General purpose imports
     path    = require('path'),
-    async   = require('async');
+    async   = require('async'),
+    // Express specific imports
+    favicon = require('serve-favicon');
 
 var routes  = require('./routes'),
     util    = require('./util'),
@@ -11,6 +13,7 @@ module.exports = function(done) {
     // Create the server instance
     var app = express();
     // Middleware
+    app.use(favicon(path.join(__dirname, '..', 'client', 'img', 'favicon.ico')));
     app.use('/static', express.static(path.join(__dirname, '..', 'client', 'dist')));
     // Perform setup
     async.series([

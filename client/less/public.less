@@ -13,10 +13,11 @@
         right: 0px;
         height: @header-height;
         background: @color-primary;
-        transition: opacity 0.5s;
+        transition: top 1.5s;
+        z-index: 200;
 
         &.hidden {
-            opacity: 0;
+            top: -50px;
         }
 
         #logo {
@@ -39,8 +40,9 @@
         overflow: hidden;
         left: 0px;
         right: 0px;
-        bottom: @footer-height;
-        top: @header-height;
+        bottom: 0px;
+        top: 0px;
+        z-index: 100;
     }
 
     footer {
@@ -52,6 +54,12 @@
         background: @color-dark-gray;
         text-align: center;
         height: @footer-height;
+        transition: bottom 1.5s;
+        z-index: 200;
+
+        &.hidden {
+            bottom: -50px;
+        }
 
         span {
             font-family: 'Montserrat', sans-serif;
