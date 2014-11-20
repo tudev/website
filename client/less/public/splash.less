@@ -31,29 +31,31 @@
             opacity: 0;
         }
 
+        .logo {
+            width: 250px;
+            height: 270px;
+            margin: 0 auto;
+            background-size: contain;
+            background-image: url(/static/img/splash-icon.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
         h1 {
             margin-top: 10px;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            font-size: 71px;
+            font-size: 64px;
             text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
             margin-bottom: 0px;
             font-weight: 400;
         }
 
-        .divider {
-            width: 740px;
-            height: 5px;
-            background: white;
-            margin: 0 auto;
-            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-        }
-
         h2 {
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
-            font-size: 30px;
-            letter-spacing: 2px;
+            font-size: 28px;
+            letter-spacing: 1px;
             margin-top: 0px;
             margin-bottom: 16px;
             text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
@@ -66,26 +68,24 @@
             text-transform: uppercase;
             display: inline-block;
             background-color: @color-primary;
-            width: 740px;
+            width: 640px;
             height: 40px;
             color: white;
             padding-top: 14px;
             font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             letter-spacing: 2px;
-            margin-top: 30px;
+            margin-top: 15px;
             box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.6);
             text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
-            transition: box-shadow 0.25s, text-shadow 0.25s, width 0.25s, background-color 0.25s;
+            transition: box-shadow 0.25s, text-shadow 0.25s, background-color 0.25s;
 
             &:hover {
-                width: 750px;
                 text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
-                box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.6);
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
             }
 
             &:active {
-                width: 730px;
                 background-color: darken(@color-primary, 5%);
             }
         }

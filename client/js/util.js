@@ -9,7 +9,7 @@ module.exports = {
     assets: {
         waitForImages: function(images, done) {
             var img, count = 0, callback = function() {
-                if (count === images.length - 1) {
+                if (++count === images.length) {
                     done();
                 }
             };

@@ -13,24 +13,63 @@
         right: 0px;
         height: @header-height;
         background: @color-primary;
-        transition: top 1.5s;
+        text-align: center;
+        transition: top 0.5s;
         z-index: 200;
 
         &.hidden {
             top: -50px;
         }
 
-        #logo {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -15px;
-            margin-top: -15px;
-            background-image: url(/static/img/header-logo.png);
-            background-size: 30px 30px;
-            cursor: pointer;
+        .middle {
+            display: inline-block;
+            height: @header-height;
+            margin: 0 auto;
+            overflow: hidden;
+            padding-left: 6px; // To accofunt for lobsided-ness
+
+            .nav {
+                display: block;
+                float: left;
+                text-align: center;
+                font-family: 'Montserrat', sans-serif;
+                color: white;
+                text-decoration: none;
+                text-transform: uppercase;
+                padding-top: 16px;
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 16px;
+                letter-spacing: 1.5px;
+                font-size: 14px;
+                font-weight: 400;
+                opacity: 0.7;
+                transition: opacity 0.2s, padding-bottom 0.2s, border-bottom 0.2s;
+
+                &:hover {
+                    opacity: 0.85;
+                }
+
+                &.active {
+                    opacity: 1.0;
+                    padding-bottom: 11px;
+                    border-bottom: 5px solid white;
+
+                    &:hover {
+                        opacity: 1.0;
+                    }
+                }
+            }
+
+            #logo {
+                padding: 0px;
+                width: 80px;
+                height: 50px;
+                background-image: url(/static/img/header-logo.png);
+                background-size: 30px 30px;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
         }
     }
 
@@ -54,7 +93,7 @@
         background: @color-dark-gray;
         text-align: center;
         height: @footer-height;
-        transition: bottom 1.5s;
+        transition: bottom 0.5s;
         z-index: 200;
 
         &.hidden {

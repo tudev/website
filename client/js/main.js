@@ -9,16 +9,17 @@ var Routes          = Router.Routes,
     NotFoundRoute   = Router.NotFoundRoute;
 
 // Authentication related page components
-var Login       = require('./components/login'),
-    Register    = require('./components/register'),
-    NotFound    = require('./components/404');
+var NotFound    = require('./components/404');
 // Publicly accessible page components
 var Public      = require('./components/public'),
     About       = require('./components/public/about'),
     Contact     = require('./components/public/contact'),
     Events      = require('./components/public/events'),
     Splash      = require('./components/public/splash'),
-    Team        = require('./components/public/team');
+    Blog        = require('./components/public/blog'),
+    Team        = require('./components/public/team'),
+    Login       = require('./components/public/login'),
+    Register    = require('./components/public/register');
 // Member accessible page components
 var Member      = require('./components/member'),
     Dashboard   = require('./components/member/dashboard'),
@@ -29,14 +30,15 @@ var Member      = require('./components/member'),
 var sitemap = (
     <Routes location="history">
         <Route name="public" path="/" handler={Public}>
+            <Route name="blog" handler={Blog}/>
             <Route name="team" handler={Team}/>
             <Route name="about" handler={About}/>
             <Route name="events" handler={Events}/>
             <Route name="contact" handler={Contact}/>
+            <Route name="login" handler={Login}/>
+            <Route name="register" handler={Register}/>
             <DefaultRoute handler={Splash}/>
         </Route>
-        <Route name="login" handler={Login}/>
-        <Route name="register" handler={Register}/>
         <Route name="member" handler={Member}>
             <Route name="profile" handler={Profile}/>
             <Route name="pay" handler={Pay}/>

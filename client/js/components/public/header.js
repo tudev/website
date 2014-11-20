@@ -1,9 +1,13 @@
 /** @jsx React.DOM */
-var React           = require('react');
+var React           = require('react'),
+    Router          = require('react-router');
 
 var Util            = require('../../util'),
     Actions         = require('../../actions'),
     AppStateStore   = require('../../stores/appstate');
+
+// React-router variables
+var Link            = Router.Link;
 
 var Header = React.createClass({
     getInitialState: function() {
@@ -32,7 +36,15 @@ var Header = React.createClass({
     render: function() {
         return (
             <header className={this.state.loaded ? '' : 'hidden'}>
-                <div id="logo"></div>
+                <div className="middle">
+                    <Link to="blog" className="nav">Blog</Link>
+                    <Link to="about" className="nav">About</Link>
+                    <Link to="register" className="nav">Register</Link>
+                    <Link to="/" className="nav" id="logo"/>
+                    <Link to="team" className="nav">Team</Link>
+                    <Link to="events" className="nav">Events</Link>
+                    <Link to="contact" className="nav">Contact</Link>
+                </div>
             </header>
         );
     }
