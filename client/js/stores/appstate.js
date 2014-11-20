@@ -8,9 +8,19 @@ var EVENT_READY     = 'appstate_event_ready';
 var appState = {
     headerLoaded: false,
     sessionDataLoaded: true,
-    sessionData: undefined // TODO make something actually load session info
+    sessionData: undefined, // TODO make something actually load session info
+    splashLoaded: false
 };
+
 var AppStateStore = assign({}, EventEmitter.prototype, {
+    // State getters
+    isReady: function() {
+        return appState.headerLoaded && appState.sessionDataLoaded;
+    },
+    splashHasLoaded: function() {
+        return appState.splashLoaded;
+    },
+    // Ready event functions
     emitReady: function() {
         this.emit(EVENT_READY);
     },
@@ -37,6 +47,9 @@ AppStateDispatcher.register(function(action) {
             if (appState.headerLoaded) {
                 AppStateStore.emitReady();
             }
+            return true;
+        case AppStateDispatcher.events.SPLASH_LOADED:
+            appState.splashLoaded = true;
             return true;
     }
 

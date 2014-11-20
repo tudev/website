@@ -1,11 +1,13 @@
 /** @jsx React.DOM */
-var React   = require('react'),
-    Router  = require('react-router');
+var React           = require('react'),
+    Router          = require('react-router');
 
-var Util    = require('../../util');
+var Util            = require('../../util'),
+    Actions         = require('../../actions'),
+    AppStateStore   = require('../../stores/appstate');
 
 // React-router variables
-var Link    = Router.Link;
+var Link            = Router.Link;
 
 var Splash = React.createClass({
     getInitialState: function() {
@@ -15,18 +17,41 @@ var Splash = React.createClass({
         };
     },
     componentDidMount: function() {
+        if (AppStateStore.isReady()) {
+            if (AppStateStore.splashHasLoaded()) {
+                // If the splash is already loaded, merely show the blurb
+                this.setState({
+                    splashLoaded: true,
+                    blurbVisible: true
+                });
+            } else {
+                // Otherwise, load splash first - then show blurb
+                this.showSplash();
+            }
+        } else {
+            // Register for ready event
+            AppStateStore.onReady(this.onReady);
+        }
+    },
+    componentWillUnmount: function() {
+        // Unregister for ready event
+        AppStateStore.offReady(this.onReady);
+    },
+    showSplash: function() {
         var component = this;
         // Wait for the splash image to load
         Util.assets.waitForImages(['/static/img/splash-bg.jpg', '/static/img/splash-icon.png'], function() {
+            // Report that the splash has been loaded
+            Actions.declareSplashLoaded();
             // Show content via animation
             Util.time.sequence({
-                0: function() {
+                500: function() {
                     // Show the splash
                     component.setState({
                         splashLoaded: true
                     });
                 },
-                250: function() {
+                750: function() {
                     // Show the blurb
                     component.setState({
                         blurbVisible: true
@@ -34,6 +59,11 @@ var Splash = React.createClass({
                 }
             });
         });
+    },
+    onReady: function() {
+        this.showSplash();
+        // Unregister for ready event
+        AppStateStore.offReady(this.onReady);
     },
     render: function() {
         return (

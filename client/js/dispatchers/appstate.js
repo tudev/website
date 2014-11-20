@@ -4,7 +4,8 @@ var assign      = require('object-assign'),
 var AppStateDispatcher = assign(new Dispatcher(), {
     events: {
         HEADER_LOADED: 1,
-        SESSION_DATA_LOADED: 2
+        SESSION_DATA_LOADED: 2,
+        SPLASH_LOADED: 3
     },
     handleHeaderLoaded: function() {
         this.dispatch({
@@ -15,6 +16,11 @@ var AppStateDispatcher = assign(new Dispatcher(), {
         this.dispatch({
             type: this.events.SESSION_DATA_LOADED,
             data: data
+        });
+    },
+    handleSplashLoaded: function() {
+        this.dispatch({
+            type: this.events.SPLASH_LOADED
         });
     }
 });
