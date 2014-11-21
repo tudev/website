@@ -3,23 +3,17 @@ var request = require('superagent');
 var AuthService = {
     getSession: function(callback) {
         request
-            .get('/session')
-            .end(function(err, res) {
-                // TODO figure out how this works
-                callback();
-            });
+            .get('/api/auth/me')
+            .end(callback);
     },
     login: function(user, pass, callback) {
         request
-            .post('/login')
+            .post('/api/auth/login')
             .send({
                 user: user,
                 pass: pass
             })
-            .end(function(err, res) {
-                // TODO figure out how this works
-                callback();
-            });
+            .end(callback);
     }
 };
 

@@ -6,5 +6,8 @@ module.exports = {
     },
     declareSplashLoaded: function() {
         AppStateDispatcher.handleSplashLoaded();
+    },
+    declareSessionDataLoaded: function(sessionData) {
+        AppStateDispatcher.handleSessionDataLoaded(sessionData);
     }
 };

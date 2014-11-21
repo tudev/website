@@ -1,13 +1,18 @@
-var express = require('express'),
+var express     = require('express'),
     // General purpose imports
-    path    = require('path'),
-    async   = require('async'),
+    path        = require('path'),
+    async       = require('async'),
+    crypto      = require('crypto'),
     // Express specific imports
-    favicon = require('serve-favicon');
+    favicon     = require('serve-favicon'),
+    session     = require('express-session'),
+    passport    = require('passport'),
+    local       = require('passport-local');
 
-var routes  = require('./routes'),
-    util    = require('./util'),
-    log     = require('./log');
+var routes      = require('./routes'),
+    db          = require('./db'),
+    util        = require('./util'),
+    log         = require('./log');
 
 module.exports = function(done) {
     // Create the server instance
@@ -15,8 +20,62 @@ module.exports = function(done) {
     // Middleware
     app.use(favicon(path.join(__dirname, '..', 'client', 'img', 'favicon.ico')));
     app.use('/static', express.static(path.join(__dirname, '..', 'client', 'dist')));
+    app.use(session({
+        resave: true,
+        saveUninitialized: true,
+        secret: util.env.sessionSecret
+    }));
     // Perform setup
     async.series([
+        function(callback) {
+            // Setup the database
+            db.setup(app, callback);
+        },
+        function(callback) {
+            // Setup the passport configuration
+            app.use(passport.initialize());
+            app.use(passport.session());
+            // Setup the local passport strategy
+            passport.use('local', new local.Strategy({
+                usernameField: 'userName',
+                passReqToCallback: true
+            }, function(req, userName, password, done) {
+                var User = req.models.User;
+                User.find({ userName: userName }).success(function(user) {
+                    if (!user) {
+                        return done(null, false, {
+                            message: 'Could not authenticate user "' + userName + '"'
+                        });
+                    } else {
+                        // We found a user matching that user name
+                        var hashedPassword = crypto.createHash('sha256').update(password, 'utf8').digest('base64');
+                        // Compare hashed password here and in the database
+                        if (user.password !== hashedPassword) {
+                            return done(null, false, {
+                                message: 'Could not authenticate user "' + userName + '"'
+                            });
+                        } else {
+                            return done(null, user);
+                        }
+                    }
+                });
+            }));
+            // Teach passport how to think about users in the database
+            passport.serializeUser(function(user, done) {
+                done(null, user.id);
+            });
+            passport.deserializeUser(function(req, id, done) {
+                var User = req.models.User;
+                User.find(id).success(function(user) {
+                    done(undefined, user);
+                }).error(function(err) {
+                    done(err);
+                });
+            });
+            // Passport is now ready to plow
+            log.debug('Passport configuration complete');
+            callback();
+        },
         function(callback) {
             // Perform server routing
             routes.route(app, callback);
