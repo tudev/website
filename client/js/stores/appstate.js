@@ -7,8 +7,8 @@ var EVENT_READY     = 'appstate_event_ready';
 
 var appState = {
     headerLoaded: false,
-    sessionDataLoaded: true,
-    sessionData: undefined, // TODO make something actually load session info
+    sessionDataLoaded: false,
+    sessionData: {},
     splashLoaded: false
 };
 
@@ -19,6 +19,10 @@ var AppStateStore = assign({}, EventEmitter.prototype, {
     },
     splashHasLoaded: function() {
         return appState.splashLoaded;
+    },
+    isLoggedIn: function() {
+        if (!appState.sessionData) return false;
+        else return (appState.sessionData.id || appState.sessionData.id === 0) && appState.sessionData.userName;
     },
     // Ready event functions
     emitReady: function() {
@@ -42,7 +46,7 @@ AppStateDispatcher.register(function(action) {
             }
             return true;
         case AppStateDispatcher.events.SESSION_DATA_LOADED:
-            appState.sessionData = action.data;
+            appState.sessionData = action.sessionData;
             appState.sessionDataLoaded = true;
             if (appState.headerLoaded) {
                 AppStateStore.emitReady();

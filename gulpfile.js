@@ -16,6 +16,10 @@ var gulp = require('gulp'),
     // Dev-server-related imports
     nodemon = require('nodemon');
 
+var constants = {
+    STAGING_DB_CONN_STRING: 'postgres://pgdev:FuckItShipIt@tudev.cloudapp.net:5432/tudev-site-dev'
+};
+
 var helpers = {
     rebundle: function(bundler) {
         gutil.log('Re-bundling client js');
@@ -110,8 +114,9 @@ gulp.task('dev', ['watch'], function() {
         env: {
             // Server environment
             PORT: 3000,
-            DB: 'postgres://dvzydscckhxzfw:wdUhUlyWZs3PEFDeIV8eySfqpB@ec2-54-204-39-187.compute-1.amazonaws.com:5432/d3irc48flvi6oh',
-            VERBOSE: true
+            DB: constants.STAGING_DB_CONN_STRING,
+            VERBOSE: true,
+            SESSION_SECRET: 'thisisnotasecretatall'
         }
     });
 });

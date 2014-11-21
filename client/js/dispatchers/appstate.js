@@ -12,10 +12,10 @@ var AppStateDispatcher = assign(new Dispatcher(), {
             type: this.events.HEADER_LOADED
         });
     },
-    handleSessionDataLoaded: function(data) {
+    handleSessionDataLoaded: function(sessionData) {
         this.dispatch({
             type: this.events.SESSION_DATA_LOADED,
-            data: data
+            sessionData: sessionData
         });
     },
     handleSplashLoaded: function() {

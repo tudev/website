@@ -30,6 +30,7 @@ exports.route = function(app, callback) {
                         res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'pages', 'index.html'));
                     });
                     // All routing now complete
+                    log.info('Endpoint routing completed');
                     callback();
                 }
             });
