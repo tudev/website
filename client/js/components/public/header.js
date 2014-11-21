@@ -12,7 +12,8 @@ var Link            = Router.Link;
 var Header = React.createClass({
     getInitialState: function() {
         return {
-            loaded: false
+            loaded: false,
+            fixed: false
         };
     },
     componentDidMount: function() {
@@ -31,11 +32,22 @@ var Header = React.createClass({
         // Show content via animation
         this.setState({
             loaded: true
+        }, function() {
+            // Register the header as fixed after the animaiton finishes
+            var component = this;
+            setTimeout(function() {
+                component.setState({
+                    fixed: true
+                });
+            }, 500);
         });
+    },
+    onMouseEnter: function() {
+        if (this.state.fixed) Actions.showSessionPanel();
     },
     render: function() {
         return (
-            <header className={this.state.loaded ? '' : 'hidden'}>
+            <header className={this.state.loaded ? '' : 'hidden'} onMouseEnter={this.onMouseEnter}>
                 <div className="middle">
                     <Link to="blog" className="nav">Blog</Link>
                     <Link to="about" className="nav">About</Link>

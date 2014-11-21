@@ -15,7 +15,7 @@
         background: @color-primary;
         text-align: center;
         transition: top 0.5s;
-        z-index: 200;
+        z-index: 300;
 
         &.hidden {
             top: -50px;
@@ -53,23 +53,23 @@
 
                 &.active {
                     opacity: 1.0;
-                    padding-bottom: 10px;
-                    border-bottom: 4px solid white;
+                    padding-bottom: 11px;
+                    border-bottom: 5px solid white;
                 }
-                
+
                 @media(max-width: 650px) {
                     padding-right: 10px;
                     padding-left: 10px;
                     font-size: 12px;
                 }
-                
+
                 @media(max-width: 350px) {
                     padding-right: 4px;
                     padding-left: 4px;
                     font-size: 8px;
                     padding-top: 2.5em;
                 }
-                
+
                 @media(max-height: 350px) {
                     padding-right: 5px;
                     padding-left: 5px;
@@ -86,12 +86,33 @@
                 background-size: 30px 30px;
                 background-position: center;
                 background-repeat: no-repeat;
-                
+
                 @media(max-width: 350px) {
                     width: 40px;
                     height: 50px;
                 }
             }
+        }
+    }
+
+    #session-panel {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 30px;
+        background: black;
+        z-index: 200;
+        transition: top 0.5s, opacity 0.5s;
+        opacity: 0;
+
+        &.concealed {
+            visibility: hidden;
+        }
+
+        &.visible {
+            top: 50px;
+            opacity: 1.0;
         }
     }
 

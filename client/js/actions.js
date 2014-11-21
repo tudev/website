@@ -1,6 +1,8 @@
-var AppStateDispatcher  = require('./dispatchers/appstate');
+var AppStateDispatcher  = require('./dispatchers/appstate'),
+    UIStateDispatcher   = require('./dispatchers/uistate');
 
 module.exports = {
+    // App State Actions
     declareHeaderLoaded: function() {
         AppStateDispatcher.handleHeaderLoaded();
     },
@@ -9,5 +11,12 @@ module.exports = {
     },
     declareSessionDataLoaded: function(sessionData) {
         AppStateDispatcher.handleSessionDataLoaded(sessionData);
+    },
+    // UI Events
+    showSessionPanel: function() {
+        UIStateDispatcher.handleSessionPanelShown();
+    },
+    hideSessionPanel: function() {
+        UIStateDispatcher.handleSessionPanelHidden();
     }
 };
