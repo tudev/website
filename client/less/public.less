@@ -29,6 +29,7 @@
             padding-left: 6px; // To account for ever-so lobsided navigation
 
             .nav {
+                overflow: hidden;
                 display: block;
                 float: left;
                 text-align: center;
@@ -52,8 +53,28 @@
 
                 &.active {
                     opacity: 1.0;
-                    padding-bottom: 11px;
-                    border-bottom: 5px solid white;
+                    padding-bottom: 10px;
+                    border-bottom: 4px solid white;
+                }
+                
+                @media(max-width: 650px) {
+                    padding-right: 10px;
+                    padding-left: 10px;
+                    font-size: 12px;
+                }
+                
+                @media(max-width: 350px) {
+                    padding-right: 4px;
+                    padding-left: 4px;
+                    font-size: 8px;
+                    padding-top: 2.5em;
+                }
+                
+                @media(max-height: 350px) {
+                    padding-right: 5px;
+                    padding-left: 5px;
+                    font-szie: 10px;
+                    padding-top: 1.5em;
                 }
             }
 
@@ -65,6 +86,11 @@
                 background-size: 30px 30px;
                 background-position: center;
                 background-repeat: no-repeat;
+                
+                @media(max-width: 350px) {
+                    width: 40px;
+                    height: 50px;
+                }
             }
         }
     }
