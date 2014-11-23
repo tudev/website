@@ -1,4 +1,4 @@
-website
+TUDev Website
 =======
 
-The Temple Dev website.
+Simply pull down the repository, install gulp and all the dependencies, and `gulp dev`.
