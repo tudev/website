@@ -42,12 +42,9 @@ var Header = React.createClass({
             }, 500);
         });
     },
-    onMouseEnter: function() {
-        if (this.state.fixed) Actions.showSessionPanel();
-    },
     render: function() {
         return (
-            <header className={this.state.loaded ? '' : 'hidden'} onMouseEnter={this.onMouseEnter}>
+            <header className={this.state.loaded ? '' : 'hidden'}>
                 <div className="middle">
                     <Link to="blog" className="nav">Blog</Link>
                     <Link to="about" className="nav">About</Link>
