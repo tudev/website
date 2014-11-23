@@ -3,6 +3,7 @@ var React           = require('react');
 
 var Actions         = require('../../actions'),
     AuthService     = require('../../services/auth'),
+    UIStateStore    = require('../../stores/uistate')
     Header          = require('./header'),
     Footer          = require('./footer');
 

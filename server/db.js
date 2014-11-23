@@ -15,7 +15,7 @@ var match   = util.env.dbConnString.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):
         protocol:   'postgres',
         port:       port,
         host:       host,
-        logging:    log.debug
+        logging:    log.details
     });
 
 module.exports = {
@@ -24,7 +24,9 @@ module.exports = {
             if (err) callback(err);
             else {
                 // Synchronize with the database
-                db.sync().then(function() {
+                db.sync({
+                    force: util.env.isResettingDb
+                }).then(function() {
                     // Add middleware to make models accessible in request object
                     app.use(function(req, res, next) {
                         req.models = modelMap;

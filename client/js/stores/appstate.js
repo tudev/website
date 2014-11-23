@@ -3,8 +3,11 @@ var assign              = require('object-assign'),
 
 var AppStateDispatcher  = require('../dispatchers/appstate');
 
-var EVENT_READY     = 'appstate_event_ready';
-
+// The event types
+var events = {
+    EVENT_READY: 1
+};
+// Object representing current app state
 var appState = {
     headerLoaded: false,
     sessionDataLoaded: false,
@@ -26,13 +29,13 @@ var AppStateStore = assign({}, EventEmitter.prototype, {
     },
     // Ready event functions
     emitReady: function() {
-        this.emit(EVENT_READY);
+        this.emit(events.EVENT_READY);
     },
     onReady: function(callback) {
-        this.on(EVENT_READY, callback);
+        this.on(events.EVENT_READY, callback);
     },
     offReady: function(callback) {
-        this.removeListener(EVENT_READY, callback);
+        this.removeListener(events.EVENT_READY, callback);
     }
 });
 

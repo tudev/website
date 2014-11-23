@@ -116,7 +116,8 @@ gulp.task('dev', ['watch'], function() {
             PORT: 3000,
             DB: constants.STAGING_DB_CONN_STRING,
             VERBOSE: true,
-            SESSION_SECRET: 'thisisnotasecretatall'
+            SESSION_SECRET: 'thisisnotasecretatall',
+            RESET_DB: true
         }
     });
 });

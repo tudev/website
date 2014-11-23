@@ -10,8 +10,8 @@ var AuthService = {
         request
             .post('/api/auth/login')
             .send({
-                user: user,
-                pass: pass
+                userName: user,
+                password: pass
             })
             .end(callback);
     }

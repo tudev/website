@@ -12,7 +12,8 @@ var Link            = Router.Link;
 var Header = React.createClass({
     getInitialState: function() {
         return {
-            loaded: false
+            loaded: false,
+            fixed: false
         };
     },
     componentDidMount: function() {
@@ -31,6 +32,14 @@ var Header = React.createClass({
         // Show content via animation
         this.setState({
             loaded: true
+        }, function() {
+            // Register the header as fixed after the animaiton finishes
+            var component = this;
+            setTimeout(function() {
+                component.setState({
+                    fixed: true
+                });
+            }, 500);
         });
     },
     render: function() {
@@ -41,9 +50,17 @@ var Header = React.createClass({
                     <Link to="about" className="nav">About</Link>
                     <Link to="register" className="nav">Register</Link>
                     <Link to="/" className="nav" id="logo"/>
-                    <Link to="team" className="nav">Team</Link>
                     <Link to="events" className="nav">Events</Link>
+                    <Link to="team" className="nav">Team</Link>
                     <Link to="contact" className="nav">Contact</Link>
+                </div>
+                <div className="session-panel">
+                    <div id="session-panel-logged-in" style={{ display: AppStateStore.isLoggedIn() ? 'block' : 'none' }}>
+                        <span>Logged In</span>
+                    </div>
+                    <div id="session-panel-not-logged-in" style={{ display: AppStateStore.isLoggedIn() ? 'none' : 'block' }}>
+                        <Link to="login" className='login-button'>Log In</Link>
+                    </div>
                 </div>
             </header>
         );
