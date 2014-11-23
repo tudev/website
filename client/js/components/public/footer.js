@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 var React           = require('react');
 
-var AppStateStore   = require('../../stores/appstate');
+var AppStateStore   = require('../../stores/appstate'),
+    Actions         = require('../../actions');
 
 var Footer = React.createClass({
     getInitialState: function() {
