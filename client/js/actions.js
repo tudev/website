@@ -2,6 +2,11 @@ var AppStateDispatcher  = require('./dispatchers/appstate'),
     UIStateDispatcher   = require('./dispatchers/uistate');
 
 module.exports = {
+    // General Actions
+    changePageTitle: function(newTitle) {
+        if (!newTitle && document) document.title = 'Temple Dev';
+        else if (document) document.title = 'Temple Dev | ' + newTitle;
+    },
     // App State Actions
     declareHeaderLoaded: function() {
         AppStateDispatcher.handleHeaderLoaded();

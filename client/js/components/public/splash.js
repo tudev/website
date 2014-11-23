@@ -17,6 +17,8 @@ var Splash = React.createClass({
         };
     },
     componentDidMount: function() {
+        Actions.changePageTitle();
+
         if (AppStateStore.isReady()) {
             if (AppStateStore.splashHasLoaded()) {
                 // If the splash is already loaded, merely show the blurb

@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 var React       = require('react');
 
-var AuthService = require('../../services/auth');
+var AuthService = require('../../services/auth'),
+    Actions     = require('../../actions');
 
 var Login = React.createClass({
     getInitialState: function() {
@@ -11,6 +12,9 @@ var Login = React.createClass({
             password: '',
             waiting: false
         };
+    },
+    componentDidMount: function() {
+        Actions.changePageTitle('Log In');
     },
     onUserNameUpdated: function(event) {
         this.setState({
