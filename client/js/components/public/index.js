@@ -5,7 +5,6 @@ var Actions         = require('../../actions'),
     AuthService     = require('../../services/auth'),
     UIStateStore    = require('../../stores/uistate')
     Header          = require('./header'),
-    SessionPanel    = require('./sessionPanel'),
     Footer          = require('./footer');
 
 var PublicPageWrapper = React.createClass({
@@ -20,15 +19,11 @@ var PublicPageWrapper = React.createClass({
             }
         });
     },
-    onContentMouseEnter: function() {
-        if (UIStateStore.sessionPanelIsVisible()) Actions.hideSessionPanel();
-    },
     render: function() {
         return (
             <div id="public">
                 <Header/>
-                <SessionPanel/>
-                <div id="content" onMouseEnter={this.onContentMouseEnter}>
+                <div id="content">
                     <this.props.activeRouteHandler/>
                 </div>
                 <Footer/>

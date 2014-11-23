@@ -53,9 +53,17 @@ var Header = React.createClass({
                     <Link to="about" className="nav">About</Link>
                     <Link to="register" className="nav">Register</Link>
                     <Link to="/" className="nav" id="logo"/>
-                    <Link to="team" className="nav">Team</Link>
                     <Link to="events" className="nav">Events</Link>
+                    <Link to="team" className="nav">Team</Link>
                     <Link to="contact" className="nav">Contact</Link>
+                </div>
+                <div className="session-panel">
+                    <div id="session-panel-logged-in" style={{ display: AppStateStore.isLoggedIn() ? 'block' : 'none' }}>
+                        <span>Logged In</span>
+                    </div>
+                    <div id="session-panel-not-logged-in" style={{ display: AppStateStore.isLoggedIn() ? 'none' : 'block' }}>
+                        <Link to="login" className='login-button'>Log In</Link>
+                    </div>
                 </div>
             </header>
         );

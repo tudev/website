@@ -1,13 +1,15 @@
-var express     = require('express'),
+var express         = require('express'),
     // General purpose imports
-    path        = require('path'),
-    async       = require('async'),
-    crypto      = require('crypto'),
+    path            = require('path'),
+    async           = require('async'),
+    crypto          = require('crypto'),
     // Express specific imports
-    favicon     = require('serve-favicon'),
-    session     = require('express-session'),
-    passport    = require('passport'),
-    local       = require('passport-local');
+    favicon         = require('serve-favicon'),
+    session         = require('express-session'),
+    cookieParser    = require('cookie-parser'),
+    bodyParser      = require('body-parser'),
+    passport        = require('passport'),
+    local           = require('passport-local');
 
 var routes      = require('./routes'),
     db          = require('./db'),
@@ -18,8 +20,19 @@ module.exports = function(done) {
     // Create the server instance
     var app = express();
     // Middleware
+    // Serves the website favicon
     app.use(favicon(path.join(__dirname, '..', 'client', 'img', 'favicon.ico')));
+    // Serves our static assets
     app.use('/static', express.static(path.join(__dirname, '..', 'client', 'dist')));
+    // Parses cookies
+    app.use(cookieParser());
+    // Reads JSON request bodies
+    app.use(bodyParser.json());
+    // Reads formdata request bodies
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    // Enables cookie-based browser sessions
     app.use(session({
         resave: true,
         saveUninitialized: true,
@@ -41,7 +54,9 @@ module.exports = function(done) {
                 passReqToCallback: true
             }, function(req, userName, password, done) {
                 var User = req.models.User;
-                User.find({ userName: userName }).success(function(user) {
+                User.find({
+                    userName: userName
+                }).then(function(user) {
                     if (!user) {
                         return done(null, false, {
                             message: 'Could not authenticate user "' + userName + '"'
@@ -58,6 +73,8 @@ module.exports = function(done) {
                             return done(null, user);
                         }
                     }
+                }).catch(function(err) {
+                    return done(null, false, err);
                 });
             }));
             // Teach passport how to think about users in the database

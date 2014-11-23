@@ -1,8 +1,8 @@
 @import "colors";
+@import "variables";
+// Public page stylesheets
 @import "public/splash";
-
-@header-height: 50px;
-@footer-height: 30px;
+@import "public/login";
 
 #public {
     header {
@@ -21,6 +21,48 @@
             top: -50px;
         }
 
+        .session-panel {
+            position: absolute;
+            top: 0px;
+            right: 15px;
+
+            &.concealed {
+                visibility: hidden;
+            }
+
+            &.visible {
+                top: 50px;
+                opacity: 1.0;
+            }
+
+            #session-panel-not-logged-in {
+                .login-button {
+                    display: inline-block;
+                    border-radius: 13px;
+                    border: none;
+                    padding: 5px 20px;
+                    margin-top: 12px;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 700;
+                    font-size: 12px;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    outline: 0 none;
+                    background: darken(@color-primary, 20%);
+                    color: white;
+                    cursor: pointer;
+                    text-decoration: none;
+                    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+                    transition: background 0.25s, color 0.25s;
+
+                    &.active {
+                        background: white;
+                        color: @color-primary;
+                    }
+                }
+            }
+        }
+
         .middle {
             display: inline-block;
             height: @header-height;
@@ -37,24 +79,26 @@
                 color: white;
                 text-decoration: none;
                 text-transform: uppercase;
-                padding-top: 16px;
+                padding-top: 17px;
                 padding-left: 20px;
                 padding-right: 20px;
-                padding-bottom: 16px;
+                padding-bottom: 18px;
                 letter-spacing: 1.5px;
-                font-size: 14px;
+                font-size: 12px;
                 font-weight: 400;
-                opacity: 0.85;
+                opacity: 0.9;
                 transition: opacity 0.2s, padding-bottom 0.2s, border-bottom 0.2s;
 
                 &:hover {
                     opacity: 1.0;
+                    padding-bottom: 13px;
+                    border-bottom: 5px solid rgba(255, 255, 255, 0.9);
                 }
 
                 &.active {
-                    opacity: 1.0;
-                    padding-bottom: 11px;
+                    padding-bottom: 13px;
                     border-bottom: 5px solid white;
+                    opacity: 1.0;
                 }
 
                 @media(max-width: 650px) {
@@ -91,28 +135,11 @@
                     width: 40px;
                     height: 50px;
                 }
+
+                &:hover {
+                    opacity: 1.0;
+                }
             }
-        }
-    }
-
-    #session-panel {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        height: 30px;
-        background: black;
-        z-index: 200;
-        transition: top 0.5s, opacity 0.5s;
-        opacity: 0;
-
-        &.concealed {
-            visibility: hidden;
-        }
-
-        &.visible {
-            top: 50px;
-            opacity: 1.0;
         }
     }
 
