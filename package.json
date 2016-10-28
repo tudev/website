@@ -1,7 +1,7 @@
 {
   "name": "tudev-website",
   "version": "1.0.0",
-  "description": "The Temple software development club's website",
+  "description": "The Temple software development club's [OLD] website",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
